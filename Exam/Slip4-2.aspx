@@ -51,7 +51,7 @@
             <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="TextBox6" ControlToValidate="TextBox5" ErrorMessage="Enter Valid Password!"></asp:CompareValidator>
             <br />
             <br />
-            <asp:Button ID="Button1" runat="server" Text="Submit" />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
         </div>
     </form>
 </body>

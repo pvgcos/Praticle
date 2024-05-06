@@ -128,12 +128,12 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Slip1-1.aspx" />
-    <Content Include="Slip1-2.aspx" />
-    <Content Include="Slip2-1.aspx" />
-    <Content Include="Slip2-2.aspx" />
-    <Content Include="Slip3-1.aspx" />
-    <Content Include="Slip4-1.aspx" />
+    <Content Include="ViewstateandQuerystring.aspx" />
+    <Content Include="Quiz.aspx" />
+    <Content Include="Statemanagementusingsession.aspx" />
+    <Content Include="Database.aspx" />
+    <Content Include="ListviewtoListView.aspx" />
+    <Content Include="ValidationControl.aspx" />
     <Content Include="Slip4-2.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -219,47 +219,47 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Slip1-1.aspx.cs">
-      <DependentUpon>Slip1-1.aspx</DependentUpon>
+    <Compile Include="ViewstateandQuerystring.aspx.cs">
+      <DependentUpon>ViewstateandQuerystring.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Slip1-1.aspx.designer.cs">
-      <DependentUpon>Slip1-1.aspx</DependentUpon>
+    <Compile Include="ViewstateandQuerystring.aspx.designer.cs">
+      <DependentUpon>ViewstateandQuerystring.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Slip1-2.aspx.cs">
-      <DependentUpon>Slip1-2.aspx</DependentUpon>
+    <Compile Include="Quiz.aspx.cs">
+      <DependentUpon>Quiz.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Slip1-2.aspx.designer.cs">
-      <DependentUpon>Slip1-2.aspx</DependentUpon>
+    <Compile Include="Quiz.aspx.designer.cs">
+      <DependentUpon>Quiz.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Slip2-1.aspx.cs">
-      <DependentUpon>Slip2-1.aspx</DependentUpon>
+    <Compile Include="Statemanagementusingsession.aspx.cs">
+      <DependentUpon>Statemanagementusingsession.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Slip2-1.aspx.designer.cs">
-      <DependentUpon>Slip2-1.aspx</DependentUpon>
+    <Compile Include="Statemanagementusingsession.aspx.designer.cs">
+      <DependentUpon>Statemanagementusingsession.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Slip2-2.aspx.cs">
-      <DependentUpon>Slip2-2.aspx</DependentUpon>
+    <Compile Include="Database.aspx.cs">
+      <DependentUpon>Database.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Slip2-2.aspx.designer.cs">
-      <DependentUpon>Slip2-2.aspx</DependentUpon>
+    <Compile Include="Database.aspx.designer.cs">
+      <DependentUpon>Database.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Slip3-1.aspx.cs">
-      <DependentUpon>Slip3-1.aspx</DependentUpon>
+    <Compile Include="ListviewtoListView.aspx.cs">
+      <DependentUpon>ListviewtoListView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Slip3-1.aspx.designer.cs">
-      <DependentUpon>Slip3-1.aspx</DependentUpon>
+    <Compile Include="ListviewtoListView.aspx.designer.cs">
+      <DependentUpon>ListviewtoListView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Slip4-1.aspx.cs">
-      <DependentUpon>Slip4-1.aspx</DependentUpon>
+    <Compile Include="ValidationControl.aspx.cs">
+      <DependentUpon>ValidationControl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Slip4-1.aspx.designer.cs">
-      <DependentUpon>Slip4-1.aspx</DependentUpon>
+    <Compile Include="ValidationControl.aspx.designer.cs">
+      <DependentUpon>ValidationControl.aspx</DependentUpon>
     </Compile>
     <Compile Include="Slip4-2.aspx.cs">
       <DependentUpon>Slip4-2.aspx</DependentUpon>

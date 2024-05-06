@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Slip1-2.aspx.cs" Inherits="Exam.WebForm2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Quiz.aspx.cs" Inherits="Exam.WebForm2" %>
 
 <!DOCTYPE html>
 
