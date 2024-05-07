@@ -1,0 +1,75 @@
+Main
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText editTextPhoneNumber;
+    TextView textViewResult;
+    Button buttonValidate;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
+        textViewResult = findViewById(R.id.textViewResult);
+        buttonValidate = findViewById(R.id.buttonValidate);
+
+        buttonValidate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isValidPhoneNumber(editTextPhoneNumber.getText().toString())) {
+                    textViewResult.setText("Valid Phone Number.");
+                } else {
+                    textViewResult.setText("Invalid Phone Number.");
+                }
+            }
+        });
+    }
+
+    private boolean isValidPhoneNumber(String number) {
+        // Pattern to match the requirements
+        return number.matches("(040|041|050|0400|044)\\d{1,4}");
+    }
+}
+
+XML
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter phone number"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/buttonValidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Validate"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>

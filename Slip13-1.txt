@@ -1,0 +1,113 @@
+Main 
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextName, editTextAddress, editTextMobile, editTextAge;
+    private Button buttonSubmit;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextName = findViewById(R.id.editTextName);
+        editTextAddress = findViewById(R.id.editTextAddress);
+        editTextMobile = findViewById(R.id.editTextMobile);
+        editTextAge = findViewById(R.id.editTextAge);
+        buttonSubmit = findViewById(R.id.buttonSubmit);
+
+        buttonSubmit.setOnClickListener(v -> {
+            if (validateInputs()) {
+                // Processing after validation success
+                Toast.makeText(MainActivity.this, "Registration Successful!", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private boolean validateInputs() {
+        if (editTextName.getText().toString().trim().isEmpty()) {
+            editTextName.setError("Name is required!");
+            return false;
+        }
+
+        if (editTextAddress.getText().toString().trim().isEmpty()) {
+            editTextAddress.setError("Address is required!");
+            return false;
+        }
+
+        if (editTextMobile.getText().toString().trim().isEmpty() || editTextMobile.getText().toString().trim().length() != 10) {
+            editTextMobile.setError("Valid mobile number is required!");
+            return false;
+        }
+
+        if (editTextAge.getText().toString().trim().isEmpty()) {
+            editTextAge.setError("Age is required!");
+            return false;
+        } else {
+            int age = Integer.parseInt(editTextAge.getText().toString().trim());
+            if (age < 18) {
+                editTextAge.setError("Age must be at least 18!");
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+XML
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:inputType="textPostalAddress"
+        android:layout_below="@id/editTextName"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile No"
+        android:inputType="phone"
+        android:layout_below="@id/editTextAddress"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Age"
+        android:inputType="number"
+        android:layout_below="@id/editTextMobile"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_below="@id/editTextAge"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>

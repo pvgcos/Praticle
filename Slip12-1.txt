@@ -1,0 +1,54 @@
+Main 
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.ToggleButton;
+
+public class MainActivity extends AppCompatActivity {
+
+    private ToggleButton toggleButton;
+    private ImageView imageViewLightBulb;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        toggleButton = findViewById(R.id.toggleButton);
+        imageViewLightBulb = findViewById(R.id.imageViewLightBulb);
+
+        toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                imageViewLightBulb.setImageResource(R.drawable.light_on);
+            } else {
+                imageViewLightBulb.setImageResource(R.drawable.light_off);
+            }
+        });
+    }
+}
+
+XML
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="Turn OFF"
+        android:textOff="Turn ON"
+        android:checked="false"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageViewLightBulb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/light_off"
+        android:layout_below="@id/toggleButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+</RelativeLayout>

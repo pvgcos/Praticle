@@ -1,0 +1,116 @@
+Main.java
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextStringInput;
+    private RadioGroup radioGroupOptions;
+    private TextView textViewResult;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextStringInput = findViewById(R.id.editTextStringInput);
+        radioGroupOptions = findViewById(R.id.radioGroupOptions);
+        textViewResult = findViewById(R.id.textViewResult);
+        Button buttonOperate = findViewById(R.id.buttonOperate);
+
+        buttonOperate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String inputText = editTextStringInput.getText().toString();
+                int selectedId = radioGroupOptions.getCheckedRadioButtonId();
+                String result = "";
+
+                if (selectedId == R.id.radioButtonUppercase) {
+                    result = inputText.toUpperCase();
+                } else if (selectedId == R.id.radioButtonLowercase) {
+                    result = inputText.toLowerCase();
+                } else if (selectedId == R.id.radioButtonRight5) {
+                    if (inputText.length() >= 5) {
+                        result = inputText.substring(inputText.length() - 5);
+                    }
+                } else if (selectedId == R.id.radioButtonLeft5) {
+                    if (inputText.length() >= 5) {
+                        result = inputText.substring(0, 5);
+                    }
+                }
+
+                textViewResult.setText(result);
+            }
+        });
+    }
+}
+
+XML
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextStringInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextStringInput"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioButtonUppercase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Uppercase"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonLowercase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lowercase"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonRight5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Right 5 characters"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonLeft5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Left 5 characters"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonOperate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Operate"
+        android:layout_below="@id/radioGroupOptions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonOperate"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>

@@ -1,0 +1,183 @@
+Main
+
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextName;
+    private TextView label;
+    private CheckBox checkBold, checkItalic, checkUnderline;
+    private RadioGroup colorGroup;
+    private Button btnDisplay, btnClear, btnExit;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextName = findViewById(R.id.editTextName);
+        label = findViewById(R.id.label);
+        checkBold = findViewById(R.id.checkBold);
+        checkItalic = findViewById(R.id.checkItalic);
+        checkUnderline = findViewById(R.id.checkUnderline);
+        colorGroup = findViewById(R.id.colorGroup);
+        btnDisplay = findViewById(R.id.btnDisplay);
+        btnClear = findViewById(R.id.btnClear);
+        btnExit = findViewById(R.id.btnExit);
+
+        btnDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateLabel();
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editTextName.setText("");
+                label.setText("");
+            }
+        });
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();  // Close the application
+            }
+        });
+    }
+
+    private void updateLabel() {
+        String text = editTextName.getText().toString();
+        int color = Color.BLACK; // Default color
+        SpannableString spannable = new SpannableString(text);
+
+        if (checkBold.isChecked()) {
+            spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        }
+        if (checkItalic.isChecked()) {
+            spannable.setSpan(new StyleSpan(Typeface.ITALIC), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        }
+        if (checkUnderline.isChecked()) {
+            spannable.setSpan(new UnderlineSpan(), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        }
+
+        int checkedRadioButtonId = colorGroup.getCheckedRadioButtonId();
+        if (checkedRadioButtonId == R.id.radioRed) {
+            color = Color.RED;
+        } else if (checkedRadioButtonId == R.id.radioGreen) {
+            color = Color.GREEN;
+        } else if (checkedRadioButtonId == R.id.radioBlue) {
+            color = Color.BLUE;
+        }
+
+        label.setTextColor(color);
+        label.setText(spannable);
+    }
+}
+
+XML
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name" />
+
+    <Button
+        android:id="@+id/btnDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display" />
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bold" />
+
+        <CheckBox
+            android:id="@+id/checkItalic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Italic" />
+
+        <CheckBox
+            android:id="@+id/checkUnderline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Underline" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/colorGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioRed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red" />
+
+        <RadioButton
+            android:id="@+id/radioGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Green" />
+
+        <RadioButton
+            android:id="@+id/radioBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blue" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear" />
+
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exit" />
+
+</LinearLayout>

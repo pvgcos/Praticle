@@ -1,0 +1,125 @@
+Main 
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextNumber1, editTextNumber2;
+    private Button buttonAdd, buttonSub, buttonMult, buttonDiv;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextNumber1 = findViewById(R.id.editTextNumber1);
+        editTextNumber2 = findViewById(R.id.editTextNumber2);
+        buttonAdd = findViewById(R.id.buttonAdd);
+        buttonSub = findViewById(R.id.buttonSub);
+        buttonMult = findViewById(R.id.buttonMult);
+        buttonDiv = findViewById(R.id.buttonDiv);
+
+        buttonAdd.setOnClickListener(v -> operate("add"));
+        buttonSub.setOnClickListener(v -> operate("sub"));
+        buttonMult.setOnClickListener(v -> operate("mult"));
+        buttonDiv.setOnClickListener(v -> operate("div"));
+    }
+
+    private void operate(String operation) {
+        String input1 = editTextNumber1.getText().toString();
+        String input2 = editTextNumber2.getText().toString();
+        if (input1.isEmpty() || input2.isEmpty()) {
+            Toast.makeText(this, "Both fields are required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double num1 = Double.parseDouble(input1);
+        double num2 = Double.parseDouble(input2);
+        double result;
+
+        switch (operation) {
+            case "add":
+                result = num1 + num2;
+                break;
+            case "sub":
+                result = num1 - num2;
+                break;
+            case "mult":
+                result = num1 * num2;
+                break;
+            case "div":
+                if (num2 == 0) {
+                    Toast.makeText(this, "Division by zero error", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                result = num1 / num2;
+                break;
+            default:
+                Toast.makeText(this, "Invalid operation", Toast.LENGTH_SHORT).show();
+                return;
+        }
+
+        Toast.makeText(this, "Result: " + result, Toast.LENGTH_LONG).show();
+    }
+}
+
+XML
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextNumber1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter first number"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/editTextNumber2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter second number"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/editTextNumber1"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:layout_below="@id/editTextNumber2"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/buttonSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUB"
+        android:layout_toRightOf="@id/buttonAdd"
+        android:layout_alignTop="@id/buttonAdd"/>
+
+    <Button
+        android:id="@+id/buttonMult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MULT"
+        android:layout_toRightOf="@id/buttonSub"
+        android:layout_alignTop="@id/buttonAdd"/>
+
+    <Button
+        android:id="@+id/buttonDiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DIV"
+        android:layout_toRightOf="@id/buttonMult"
+        android:layout_alignTop="@id/buttonAdd"/>
+
+</RelativeLayout>

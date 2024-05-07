@@ -1,0 +1,134 @@
+Main 
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextAccountNumber, editTextAccountType, editTextBalance;
+    private Button buttonCreateAccount, buttonDeposit, buttonWithdraw, buttonCheckBalance;
+    private double balance;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextAccountNumber = findViewById(R.id.editTextAccountNumber);
+        editTextAccountType = findViewById(R.id.editTextAccountType);
+        editTextBalance = findViewById(R.id.editTextBalance);
+        buttonCreateAccount = findViewById(R.id.buttonCreateAccount);
+        buttonDeposit = findViewById(R.id.buttonDeposit);
+        buttonWithdraw = findViewById(R.id.buttonWithdraw);
+        buttonCheckBalance = findViewById(R.id.buttonCheckBalance);
+
+        buttonCreateAccount.setOnClickListener(v -> {
+            try {
+                balance = Double.parseDouble(editTextBalance.getText().toString());
+                Toast.makeText(MainActivity.this, "Account Created Successfully! Balance: $" + balance, Toast.LENGTH_SHORT).show();
+                editTextBalance.setText(""); // Clear the balance input
+            } catch (NumberFormatException e) {
+                Toast.makeText(MainActivity.this, "Invalid balance amount", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        buttonDeposit.setOnClickListener(v -> {
+            try {
+                double depositAmount = Double.parseDouble(editTextBalance.getText().toString());
+                balance += depositAmount;
+                Toast.makeText(MainActivity.this, "Deposit Successful! New Balance: $" + balance, Toast.LENGTH_LONG).show();
+                editTextBalance.setText("");
+            } catch (NumberFormatException e) {
+                Toast.makeText(MainActivity.this, "Invalid deposit amount", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        buttonWithdraw.setOnClickListener(v -> {
+            try {
+                double withdrawAmount = Double.parseDouble(editTextBalance.getText().toString());
+                if (withdrawAmount <= balance) {
+                    balance -= withdrawAmount;
+                    Toast.makeText(MainActivity.this, "Withdrawal Successful! Remaining Balance: $" + balance, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Insufficient funds!", Toast.LENGTH_LONG).show();
+                }
+                editTextBalance.setText("");
+            } catch (NumberFormatException e) {
+                Toast.makeText(MainActivity.this, "Invalid withdrawal amount", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        buttonCheckBalance.setOnClickListener(v -> {
+            Toast.makeText(MainActivity.this, "Current Balance: $" + balance, Toast.LENGTH_LONG).show();
+        });
+    }
+}
+
+XML
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextAccountNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Account Number"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/editTextAccountType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Account Type"
+        android:inputType="text"
+        android:layout_below="@id/editTextAccountNumber"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/editTextBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Initial Balance"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/editTextAccountType"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/buttonCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:layout_below="@id/editTextBalance"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/buttonDeposit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Deposit Money"
+        android:layout_below="@id/buttonCreateAccount"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/buttonWithdraw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Withdraw Money"
+        android:layout_below="@id/buttonDeposit"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/buttonCheckBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Balance"
+        android:layout_below="@id/buttonWithdraw"
+        android:layout_marginTop="20dp"/>
+</RelativeLayout>

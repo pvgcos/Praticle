@@ -1,0 +1,104 @@
+MainActivity.java
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editText;
+    private TextView resultText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editText = findViewById(R.id.inputNumber);
+        resultText = findViewById(R.id.resultText);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_factorial) {
+            calculateFactorial();
+            return true;
+        } else if (id == R.id.action_sum_digits) {
+            calculateSumOfDigits();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void calculateFactorial() {
+        int number = Integer.parseInt(editText.getText().toString());
+        int result = 1;
+        for (int i = 2; i <= number; i++) {
+            result *= i;
+        }
+        resultText.setText("Factorial: " + result);
+    }
+
+    private void calculateSumOfDigits() {
+        int number = Integer.parseInt(editText.getText().toString());
+        int sum = 0;
+        while (number > 0) {
+            sum += number % 10;
+            number /= 10;
+        }
+        resultText.setText("Sum of Digits: " + sum);
+    }
+}
+
+activity_main.xml
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/inputNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Enter a number" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputNumber"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
+
+Right-click on res -> New -> Android Resource Directory.
+Choose Resource type as menu.
+Right-click on the newly created menu directory -> New -> Menu Resource File.
+Name it menu_main.
+
+menu.main.xml
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_factorial"
+        android:title="Find Factorial"/>
+    <item
+        android:id="@+id/action_sum_digits"
+        android:title="Find Sum of Digits"/>
+</menu>

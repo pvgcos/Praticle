@@ -1,0 +1,89 @@
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextNumber;
+    private TextView textViewResult;
+    private Button btnCheck;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextNumber = findViewById(R.id.getnum);
+        textViewResult = findViewById(R.id.textViewResult);
+        btnCheck = findViewById(R.id.btnCheck);
+
+        btnCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPalindrome();
+            }
+        });
+    }
+
+    private void checkPalindrome() {
+        String num = editTextNumber.getText().toString();
+        if (num.isEmpty()) {
+            textViewResult.setText("Please enter a number.");
+            return;
+        }
+
+        if (isPalindrome(num)) {
+            textViewResult.setText(num + " is a Palindrome.");
+        } else {
+            textViewResult.setText(num + " is not a Palindrome.");
+        }
+    }
+
+    private boolean isPalindrome(String str) {
+        int i = 0, j = str.length() - 1;
+        while (i < j) {
+            if (str.charAt(i) != str.charAt(j)) {
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
+
+XML
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/getnum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter a number"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textAlignment="center" />
+
+</LinearLayout>
+
+Input 121,2002

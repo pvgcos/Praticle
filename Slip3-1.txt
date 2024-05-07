@@ -1,0 +1,86 @@
+Main
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText editTextNumber;
+    TextView textViewResult;
+    Button buttonCheck;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextNumber = findViewById(R.id.editTextNumber);
+        textViewResult = findViewById(R.id.textViewResult);
+        buttonCheck = findViewById(R.id.buttonCheck);
+
+        buttonCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isArmstrong(editTextNumber.getText().toString())) {
+                    textViewResult.setText("The number is an Armstrong number.");
+                } else {
+                    textViewResult.setText("The number is not an Armstrong number.");
+                }
+            }
+        });
+    }
+
+    private boolean isArmstrong(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            int sum = 0, temp = num;
+            int length = number.length();
+            while (temp != 0) {
+                int digit = temp % 10;
+                sum += Math.pow(digit, length);
+                temp /= 10;
+            }
+            return num == sum;
+        } catch (NumberFormatException e) {
+            textViewResult.setText("Please enter a valid number.");
+            return false;
+        }
+    }
+}
+
+XML
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Enter number" />
+
+    <Button
+        android:id="@+id/buttonCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check if Armstrong"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>
